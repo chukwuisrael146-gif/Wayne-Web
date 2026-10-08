@@ -8,6 +8,7 @@ import {
   LayoutGrid,
   MessageSquare,
   Mail,
+  GitBranch,
 } from 'lucide-react';
 
 export const navigationItems = [
@@ -17,6 +18,7 @@ export const navigationItems = [
   { id: 'services', label: 'Services', Icon: Layers },
   { id: 'skills', label: 'Skills', Icon: Shapes },
   { id: 'projects', label: 'Portfolio', Icon: LayoutGrid },
+  { id: 'contributions', label: 'GitHub contributions', Icon: GitBranch },
   { id: 'testimonials', label: 'Testimonials', Icon: MessageSquare },
   { id: 'contact', label: 'Contact', Icon: Mail },
 ];
@@ -66,10 +68,10 @@ export default function Navigation() {
       className="
         fixed bottom-4 left-1/2 z-40 flex max-w-[calc(100vw-24px)]
         -translate-x-1/2 rounded-full border border-white/30
-        bg-[#171717]/95 p-1 backdrop-blur-md
+        bg-[#171717]/95 p-1 backdrop-blur-md overflow-x-auto
         lg:top-1/2 lg:right-8 lg:bottom-auto lg:left-auto
         lg:max-h-[90svh] lg:translate-x-0 lg:-translate-y-1/2
-        lg:flex-col lg:py-4
+        lg:flex-col lg:py-4 lg:overflow-visible
       "
     >
       {navigationItems.map(({ id, label, Icon }) => {
@@ -82,7 +84,7 @@ export default function Navigation() {
             aria-label={label}
             aria-current={active ? 'location' : undefined}
             className={`
-              group relative flex h-10 w-10 shrink-0 items-center
+              group relative flex h-11 w-8 shrink-0 items-center min-[375px]:w-9 sm:w-10
               justify-center rounded-full transition-colors lg:h-11 lg:w-12
               ${active ? 'text-accent' : 'text-neutral-400 hover:text-accent'}
             `}

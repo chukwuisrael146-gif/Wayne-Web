@@ -13,8 +13,18 @@ Django backend and React frontend for a personal portfolio inspired by Drake.
 - `frontend/src/assets/`: bundled images and assets.
 - `frontend/public/`: publicly served files, such as a CV.
 
-This is an initial scaffold. Models, API endpoints, design, and the contact form
-will be implemented next. Dependencies have not been installed.
+The frontend includes the video background, profile card, section navigation,
+appearance settings, hero, about, experience, services, skills, projects,
+GitHub contributions placeholder, testimonials, and contact message preparation.
+
+Personal details live in `frontend/src/data/profile.js`. Project details and
+screenshots are configured in `frontend/src/data/projects.js`; image assets go
+in `frontend/public/images/`. Three projects appear initially, with an expansion
+button for the rest. Add verified testimonials to the exported testimonials array.
+
+The contact form validates and prepares an email draft; it does not submit to a
+backend or claim delivery. GitHub contribution data is deliberately unconnected
+for the next guided setup. Django models and API endpoints are still a scaffold.
 
 ## Local setup (PowerShell)
 

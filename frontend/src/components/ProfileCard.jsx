@@ -1,4 +1,5 @@
 import { Mail } from 'lucide-react';
+import { profile } from '../data/profile';
 
 const socialLinks = [
   { label: 'Instagram', url: '' },
@@ -20,7 +21,7 @@ function SocialIcon({ label }) {
 
 export default function ProfileCard() {
   const logo = `${import.meta.env.BASE_URL}images/ci-logo.png`;
-  const email = ''; // Add your email address when available.
+  const email = profile.email;
 
   return (
     <aside
@@ -47,7 +48,7 @@ export default function ProfileCard() {
 
       <div className="text-center">
         {email ? (
-          <a href={`mailto:${email}`} className="text-[22px] break-all hover:text-accent">{email}</a>
+          <a href={`mailto:${email}`} className="text-lg break-all hover:text-accent">{email}</a>
         ) : (
           <p className="text-lg text-[#999]">Full Stack Developer</p>
         )}
@@ -58,7 +59,8 @@ export default function ProfileCard() {
       </div>
 
       <div className="profile-card__socials mt-6 flex shrink-0 justify-center gap-2">
-        {socialLinks.map(({ label, url }) => {
+        {socialLinks.map(({ label }) => {
+          const url = profile.socials[label];
           const classes = 'grid size-12 place-items-center rounded-full border-2 border-[#565656] text-[#999] transition-colors';
           return url ? (
             <a key={label} href={url} aria-label={label} target="_blank" rel="noopener noreferrer" className={`${classes} hover:border-accent hover:text-accent`}>
