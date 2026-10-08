@@ -1,16 +1,54 @@
-:root {
-  font-family: system-ui, sans-serif;
-  color: #f5f5f5;
-  background: #101211;
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #28e98c;
+  --color-muted: #b8c4c1;
 }
 
-* { box-sizing: border-box; }
-body { margin: 0; }
-main {
-  position: relative;
-  z-index: 1;
-  min-height: 100svh;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 48px 24px;
+/* Keep the entire profile visible on shorter desktop displays. */
+@media (min-width: 1024px) and (max-height: 800px) {
+  .portfolio-layout { padding-top: 32px; }
+  .profile-card {
+    top: 32px;
+    min-height: calc(100svh - 64px);
+    padding: 24px 32px;
+  }
+  .profile-card__portrait {
+    height: clamp(140px, 25svh, 200px);
+    aspect-ratio: auto;
+    margin-block: 24px;
+  }
+  .profile-card__copyright { margin-top: 16px; }
+  .profile-card__socials { margin-top: 16px; }
+  .profile-card__socials > * { width: 40px; height: 40px; }
+  .profile-card__contact { padding-top: 20px; }
+}
+
+@media (min-width: 1024px) and (max-height: 600px) {
+  .profile-card {
+    max-height: calc(100svh - 64px);
+    overflow-y: auto;
+  }
+}
+
+@layer base {
+  :root {
+    font-family: system-ui, sans-serif;
+    color: #f5f5f5;
+    background: #101211;
+  }
+
+  body { margin: 0; }
+
+  /* Keeps the current starter content above the fixed video background. */
+  main { position: relative; z-index: 1; }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 6px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
 }
