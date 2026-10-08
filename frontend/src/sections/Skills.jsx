@@ -17,7 +17,7 @@ export default function Skills() {
       <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3">
         {skills.map(({ name, category, mark, Icon }) => (
           <div key={name} className="group text-center">
-            <div className="flex min-h-44 flex-col items-center justify-center gap-4 rounded-[32px] border border-white/25 bg-[#1f1f1f]/65 p-5 transition-colors group-hover:border-accent">
+            <div className="motion-card flex min-h-44 flex-col items-center justify-center gap-4 rounded-[32px] border border-white/25 bg-[#1f1f1f]/65 p-5 transition-colors group-hover:border-accent">
               <Icon size={27} strokeWidth={1.3} className="text-neutral-400" />
               <span className="text-4xl font-light text-accent">{mark}</span>
             </div>

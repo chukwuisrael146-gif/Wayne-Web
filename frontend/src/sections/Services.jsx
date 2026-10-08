@@ -13,7 +13,7 @@ export default function Services() {
       <SectionHeading Icon={Layers} label="Services">What I can <span className="text-accent">build for you</span></SectionHeading>
       <div className="mt-10 space-y-5">
         {services.map(({ Icon, title, detail, tag }) => (
-          <a key={title} href="#contact" className="group block rounded-[24px] border border-white/25 bg-[#1f1f1f]/65 p-7 transition-colors hover:border-accent sm:p-9">
+          <a key={title} href="#contact" className="motion-card group block rounded-[24px] border border-white/25 bg-[#1f1f1f]/65 p-7 transition-colors hover:border-accent sm:p-9">
             <div className="flex items-start justify-between gap-5"><h3 className="text-2xl font-light">{title}</h3><Icon className="shrink-0 text-accent" size={27} strokeWidth={1.3} /></div>
             <p className="mt-4 max-w-xl text-sm leading-7 text-neutral-400">{detail}</p>
             <div className="mt-7 flex items-center justify-between gap-4"><span className="text-[11px] tracking-widest text-neutral-300">{tag}</span><ArrowUpRight size={18} className="text-neutral-400 group-hover:text-accent" /></div>

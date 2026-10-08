@@ -7,14 +7,14 @@ export default function ProjectCard({ project, featured = false }) {
 
   return (
     <article className={featured ? 'sm:col-span-2' : ''}>
-      <div className="group relative aspect-[16/10] overflow-hidden rounded-[28px] border border-white/15 bg-[#242424]">
+      <div className="motion-card group relative aspect-[16/10] overflow-hidden rounded-[28px] border border-white/15 bg-[#242424]">
         {showImage ? (
           <img
             src={project.image}
             alt={`${project.title} screenshot`}
             loading="lazy"
             onError={() => setFailedImage(project.image)}
-            className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105"
+            className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-[1200ms] motion-safe:ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-105"
           />
         ) : (
           <div className="grid h-full place-items-center bg-linear-to-br from-[#29352f] to-[#171717]">

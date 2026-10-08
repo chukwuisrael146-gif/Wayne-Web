@@ -41,7 +41,7 @@ export default function SettingsButton() {
           focus-visible:outline-2 focus-visible:outline-accent
         "
       >
-        <Settings size={19} strokeWidth={1.5} />
+        <Settings size={19} strokeWidth={1.5} className="settings-gear" />
       </button>
 
       {open && (
@@ -49,7 +49,7 @@ export default function SettingsButton() {
           id="appearance-settings"
           aria-label="Appearance settings"
           className="
-            fixed top-[100px] left-3 z-50 w-64 rounded-2xl
+            settings-panel fixed top-[100px] left-3 z-50 w-64 rounded-2xl
             border border-white/20 bg-[#202020] p-5 shadow-2xl
           "
         >

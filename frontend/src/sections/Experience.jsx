@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { ArrowUpRight, BriefcaseBusiness } from 'lucide-react';
+import useTimelineProgress from '../hooks/useTimelineProgress';
 import SectionHeading from '../components/SectionHeading';
 import { profile } from '../data/profile';
 
@@ -9,16 +11,23 @@ const experience = [
 ];
 
 export default function Experience() {
+  const timelineRef = useRef(null);
+  useTimelineProgress(timelineRef);
+
   return (
     <section id="resume" className="scroll-mt-16 py-20">
       <SectionHeading Icon={BriefcaseBusiness} label="Resume">Experience & <span className="text-accent">growth</span></SectionHeading>
-      <div className="mt-12">
+      <div ref={timelineRef} data-scroll-timeline className="experience-timeline relative mt-12">
+        <div aria-hidden="true" className="timeline-rail"><span className="timeline-fill" /></div>
+        <span aria-hidden="true" className="timeline-traveler" />
         {experience.map((item) => (
-          <article key={item.label} className="group relative border-l border-white/20 pb-12 pl-8 last:pb-0 sm:pl-12">
-            <span className="absolute top-1 -left-[5px] size-[9px] rounded-full bg-neutral-500 transition-colors group-hover:bg-accent" />
-            <p className="text-xs tracking-widest text-accent">{item.label}</p>
-            <h3 className="mt-4 text-2xl font-light">{item.title}</h3>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-neutral-400">{item.detail}</p>
+          <article key={item.label} className="experience-item relative pb-12 pl-8 last:pb-0 sm:pl-12">
+            <span aria-hidden="true" className="timeline-marker" />
+            <div className="timeline-entry">
+              <p className="text-xs tracking-widest text-accent">{item.label}</p>
+              <h3 className="mt-4 text-2xl font-light">{item.title}</h3>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-neutral-400">{item.detail}</p>
+            </div>
           </article>
         ))}
       </div>

@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import useScrollReveal from './hooks/useScrollReveal';
 import AbstractBallBackground from './components/AbstractBallBackground';
 import ProfileCard from './components/ProfileCard';
 import SettingsButton from './components/SettingsButton';
@@ -14,6 +16,8 @@ import Testimonials from './sections/Testimonials';
 import Contact from './sections/Contact';
 
 export default function App() {
+  const mainRef = useRef(null);
+  useScrollReveal(mainRef);
   return (
     <>
       <AbstractBallBackground />
@@ -23,7 +27,7 @@ export default function App() {
       <a href="#main-content" className="sr-only fixed top-2 left-12 z-[60] rounded-lg bg-accent px-5 py-3 text-black focus:not-sr-only">Skip to content</a>
       <div className="portfolio-layout relative z-10 grid items-start gap-12 px-5 pt-16 pb-24 lg:grid-cols-[350px_minmax(0,1fr)] lg:pr-36 xl:grid-cols-[400px_minmax(0,1fr)]">
         <ProfileCard />
-        <main id="main-content" tabIndex={-1} className="min-w-0">
+        <main ref={mainRef} id="main-content" tabIndex={-1} className="min-w-0">
           <div className="mx-auto max-w-[770px]">
             <Hero />
             <About />

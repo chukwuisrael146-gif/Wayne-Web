@@ -33,7 +33,7 @@ export default function Hero() {
           <svg
             viewBox="0 0 144 144"
             aria-hidden="true"
-            className="absolute inset-0 size-full motion-safe:animate-[spin_18s_linear_infinite]"
+            className="absolute inset-0 size-full motion-safe:animate-[spin_30s_linear_infinite]"
           >
             <defs>
               <path
