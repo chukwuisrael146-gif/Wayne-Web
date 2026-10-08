@@ -1,0 +1,49 @@
+.abstract-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #101211;
+}
+
+.abstract-background__canvas,
+.abstract-background__shade {
+  position: absolute;
+  inset: 0;
+}
+
+.abstract-background__canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.abstract-background__shade {
+  background:
+    linear-gradient(90deg, rgba(16, 18, 17, 0.72), transparent 70%),
+    radial-gradient(ellipse at 65% 45%, transparent 28%, rgba(8, 10, 9, 0.68) 100%);
+}
+
+.abstract-background__fallback {
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  width: min(65vw, 650px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  border-radius: 46% 54% 52% 48% / 49% 43% 57% 51%;
+  background:
+    repeating-radial-gradient(ellipse at 35% 30%, transparent 0 4px, #75917c30 5px 6px),
+    radial-gradient(circle at 30% 25%, #68796b, #28342b 40%, #101512 72%);
+  box-shadow: inset -30px -40px 70px #0009;
+}
+
+.abstract-background__fallback.is-hidden { display: none; }
+
+@media (max-width: 767px) {
+  .abstract-background__fallback { left: 55%; top: 60%; width: 85vw; }
+  .abstract-background__shade {
+    background: linear-gradient(180deg, #10121199, transparent 70%);
+  }
+}
