@@ -7,3 +7,4 @@ python-dotenv
 gunicorn
 whitenoise
 django-storages[s3]
+django-cors-headers

@@ -46,9 +46,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "portfolio.apps.PortfolioConfig",
+    "corsheaders",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -57,6 +61,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    origin.strip().rstrip("/")
+    for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
+CORS_URLS_REGEX = r"^/api/.*$"
 ROOT_URLCONF = "config.urls"
 TEMPLATES = [{
     "BACKEND": "django.template.backends.django.DjangoTemplates",
