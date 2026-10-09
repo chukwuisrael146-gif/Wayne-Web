@@ -18,16 +18,20 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-railway_domain = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
-
-if railway_domain:
-    ALLOWED_HOSTS.append(railway_domain)
-
-CSRF_TRUSTED_ORIGINS = (
-    [f"https://{railway_domain}"]
-    if railway_domain
-    else []
+railway_domain = (
+    os.environ.get("RAILWAY_PUBLIC_DOMAIN")
+    or "backend-production-c2015.up.railway.app"
 )
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    railway_domain,
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{railway_domain}",
+]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = not DEBUG
