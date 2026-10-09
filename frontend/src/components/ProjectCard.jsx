@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
-export default function ProjectCard({ project, featured = false }) {
-  const [failedImage, setFailedImage] = useState('');
+export default function ProjectCard({ project }) {
+  const [failedImage, setFailedImage] = useState("");
   const showImage = project.image && failedImage !== project.image;
 
   return (
-    <article className={featured ? 'sm:col-span-2' : ''}>
-      <div className="motion-card group relative aspect-[16/10] overflow-hidden rounded-[28px] border border-white/15 bg-[#242424]">
+    <article className="flex h-full min-w-0 flex-col">
+      <div className="motion-card group relative aspect-[16/10] shrink-0 overflow-hidden rounded-[28px] border border-white/15 bg-[#242424]">
         {showImage ? (
           <img
             src={project.image}
@@ -19,7 +19,7 @@ export default function ProjectCard({ project, featured = false }) {
         ) : (
           <div className="grid h-full place-items-center bg-linear-to-br from-[#29352f] to-[#171717]">
             <span className="text-7xl font-light text-white/15">
-              {String(project.id).padStart(2, '0')}
+              {String(project.id).padStart(2, "0")}
             </span>
           </div>
         )}
@@ -38,17 +38,15 @@ export default function ProjectCard({ project, featured = false }) {
         )}
       </div>
 
-      <h3 className="mt-5 text-2xl font-light">
+      <h3 className="mt-5 min-h-16 line-clamp-2 text-2xl leading-8 font-light">
         {project.title}
       </h3>
 
-      {project.description && (
-        <p className="mt-3 text-sm leading-7 text-neutral-400">
-          {project.description}
-        </p>
-      )}
+      <p className="mt-3 min-h-21 line-clamp-3 text-sm leading-7 text-neutral-400">
+        {project.description || ""}
+      </p>
 
-      <div className="mt-4 flex flex-wrap gap-6">
+      <div className="mt-auto flex min-h-15 flex-wrap items-center gap-x-6 pt-4">
         {project.liveUrl && (
           <a
             href={project.liveUrl}
