@@ -94,11 +94,29 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": (
-            "whitenoise.storage.CompressedManifestStaticFilesStorage"
-        ),
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+if os.environ.get("AWS_STORAGE_BUCKET_NAME"):
+    STORAGES["default"] = {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "bucket_name": os.environ["AWS_STORAGE_BUCKET_NAME"],
+            "access_key": os.environ["AWS_ACCESS_KEY_ID"],
+            "secret_key": os.environ["AWS_SECRET_ACCESS_KEY"],
+            "endpoint_url": os.environ["AWS_S3_ENDPOINT_URL"],
+            "region_name": os.environ["AWS_S3_REGION_NAME"],
+            "addressing_style": os.environ.get(
+                "AWS_S3_ADDRESSING_STYLE", "virtual"
+            ),
+            "signature_version": "s3v4",
+            "default_acl": None,
+            "querystring_auth": True,
+            "querystring_expire": 3600,
+            "file_overwrite": False,
+        },
+    }
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
