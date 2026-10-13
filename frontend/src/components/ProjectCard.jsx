@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, onSelect }) {
   const [failedImage, setFailedImage] = useState("");
   const showImage = project.image && failedImage !== project.image;
 
@@ -45,6 +45,8 @@ export default function ProjectCard({ project }) {
       <p className="mt-3 min-h-21 line-clamp-3 text-sm leading-7 text-neutral-400">
         {project.description || ""}
       </p>
+
+      <button type="button" onClick={() => onSelect(project)} aria-label={`Read more about ${project.title}`} className="mt-2 min-h-11 self-start text-sm text-neutral-300 underline underline-offset-4 hover:text-accent">Project details</button>
 
       <div className="mt-auto flex min-h-15 flex-wrap items-center gap-x-6 pt-4">
         {project.liveUrl && (

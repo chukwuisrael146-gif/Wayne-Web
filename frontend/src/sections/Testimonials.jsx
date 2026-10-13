@@ -3,6 +3,7 @@ import SectionHeading from '../components/SectionHeading';
 import { testimonials } from '../data/profile';
 
 export default function Testimonials() {
+  if (!testimonials.length) return null;
   return (
     <section id="testimonials" className="scroll-mt-16 py-20">
       <SectionHeading Icon={MessageSquare} label="Testimonials">Feedback, in <span className="text-accent">their words</span></SectionHeading>

@@ -10,6 +10,7 @@ import {
   Mail,
   GitBranch,
 } from 'lucide-react';
+import { testimonials } from '../data/profile';
 
 export const navigationItems = [
   { id: 'home', label: 'Home', Icon: Home },
@@ -21,7 +22,7 @@ export const navigationItems = [
   { id: 'contributions', label: 'GitHub contributions', Icon: GitBranch },
   { id: 'testimonials', label: 'Testimonials', Icon: MessageSquare },
   { id: 'contact', label: 'Contact', Icon: Mail },
-];
+].filter((item) => item.id !== 'testimonials' || testimonials.length > 0);
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home');

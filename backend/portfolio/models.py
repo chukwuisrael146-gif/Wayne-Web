@@ -1,3 +1,6 @@
+import uuid
+
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 
@@ -36,3 +39,21 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ContactEnquiry(models.Model):
+    submission_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    subject = models.CharField(max_length=200)
+    message = models.TextField(max_length=5000, validators=[MinLengthValidator(20)])
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    notified_at = models.DateTimeField(null=True, blank=True, editable=False)
+
+    class Meta:
+        ordering = ["-created_at", "-id"]
+        verbose_name_plural = "Contact enquiries"
+
+    def __str__(self):
+        return f"{self.name} — {self.subject}"

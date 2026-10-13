@@ -13,6 +13,16 @@ export default function SettingsButton() {
   const [selected, setSelected] = useState('#28e98c');
 
   useEffect(() => {
+    try {
+      const saved = localStorage.getItem('portfolio-accent');
+      if (colours.some(({ value }) => value === saved)) {
+        setSelected(saved);
+        document.documentElement.style.setProperty('--color-accent', saved);
+      }
+    } catch { /* Appearance still works when browser storage is disabled. */ }
+  }, []);
+
+  useEffect(() => {
     function handleKey(event) {
       if (event.key === 'Escape') setOpen(false);
     }
@@ -24,6 +34,7 @@ export default function SettingsButton() {
   function changeColour(colour) {
     setSelected(colour);
     document.documentElement.style.setProperty('--color-accent', colour);
+    try { localStorage.setItem('portfolio-accent', colour); } catch { /* Optional persistence. */ }
   }
 
   return (

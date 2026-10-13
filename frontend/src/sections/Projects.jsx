@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUp, LayoutGrid } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
+import ProjectDetails from "../components/ProjectDetails";
 import { fetchProjects } from "../services/api";
 
 export default function Projects() {
@@ -9,6 +10,7 @@ export default function Projects() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -91,7 +93,7 @@ export default function Projects() {
             className="mt-10 grid grid-cols-1 gap-x-7 gap-y-10 sm:grid-cols-2"
           >
             {visibleProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.id} project={project} onSelect={setSelectedProject} />
             ))}
           </div>
 
@@ -111,6 +113,7 @@ export default function Projects() {
           )}
         </>
       )}
+      <ProjectDetails project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
   );
 }

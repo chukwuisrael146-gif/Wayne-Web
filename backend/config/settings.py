@@ -13,11 +13,6 @@ if not SECRET_KEY:
         SECRET_KEY = "local-development-only-change-before-deployment"
     else:
         raise RuntimeError("DJANGO_SECRET_KEY must be set in production")
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-]
-
 railway_domain = (
     os.environ.get("RAILWAY_PUBLIC_DOMAIN")
     or "backend-production-c2015.up.railway.app"
@@ -50,9 +45,7 @@ INSTALLED_APPS = [
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -132,3 +125,12 @@ if os.environ.get("AWS_STORAGE_BUCKET_NAME"):
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Messages are always saved; notifications become active when these are configured.
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+CONTACT_FROM_EMAIL = os.environ.get("CONTACT_FROM_EMAIL", "")
+CONTACT_TO_EMAIL = os.environ.get("CONTACT_TO_EMAIL", "chukwuisrael146@gmail.com")
+
+# Railway is one trusted proxy. Local development does not trust forwarded IPs.
+REST_FRAMEWORK = {"NUM_PROXIES": int(os.environ.get("DJANGO_NUM_PROXIES", "0" if DEBUG else "1"))}
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1_048_576

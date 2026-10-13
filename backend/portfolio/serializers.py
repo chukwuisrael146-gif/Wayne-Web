@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from .models import Project
+import uuid
+
+from .models import ContactEnquiry, Project
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -38,3 +40,18 @@ class ProjectSerializer(serializers.ModelSerializer):
             for technology in project.technologies.split(",")
             if technology.strip()
         ]
+
+
+class ContactEnquirySerializer(serializers.ModelSerializer):
+    submission_id = serializers.UUIDField(default=uuid.uuid4)
+    message = serializers.CharField(min_length=20, max_length=5000, trim_whitespace=True)
+    website = serializers.CharField(required=False, allow_blank=True, write_only=True, max_length=200)
+
+    class Meta:
+        model = ContactEnquiry
+        fields = ("submission_id", "name", "email", "subject", "message", "website")
+
+    def validate_subject(self, value):
+        if "\n" in value or "\r" in value:
+            raise serializers.ValidationError("Enter a subject on one line.")
+        return value
